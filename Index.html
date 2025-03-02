@@ -7,7 +7,17 @@
 </head>
 <body>
     <h1>Interactive Dashboard</h1>
-    <div id="dashboard"></div>
+    <br>
+    <div id="dashboard">
+        <form id="productForm">
+            <input type="text" id="productName" placeholder="Product Name" required>
+            <button type="submit">Add Product</button>
+            <div id="error"></div>
+        </form>
+        <ul id="inventoryList"></ul>
+        <br>
+    </div>
+    <ul id="inventoryList"></ul>
     <script src="cc_12.js"></script>
 </body>
 </html>

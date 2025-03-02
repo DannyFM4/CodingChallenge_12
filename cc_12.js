@@ -29,3 +29,40 @@ metricCardArray.forEach(card => { // uses forEach method to update the informati
 
     card.style.backgroundColor = "#f0f8ff";
 });
+
+
+// Task 3: Dynamic Inventory Management – Adding and Removing Items
+
+const inventoryList = document.getElementById("inventoryList");
+
+function addItemToInventory(product) {
+    let newListItem = document.createElement("li");
+    newListItem.setAttribute("class", "product-item");
+    newListItem.setAttribute("id", "product");
+    newListItem.setAttribute("onclick", `removeInventoryItem("${product}")`);
+    newListItem.textContent = product;
+    inventoryList.appendChild(newListItem);
+};
+
+addItemToInventory("Click Me");
+addItemToInventory("Add a product below");
+
+let productForm = document.getElementById('productForm');
+let error = document.getElementById('Error');
+
+productForm.addEventListener('submit', (event1) => {
+    let productName = document.getElementById('productName').ariaValueMax;
+    if(productName === '') {
+        error.textContent = 'Product name is reuired';
+        event1.preventDefault();
+    } else {
+        error.textContent = '';
+        addItemToInventory(productName);
+        event1.preventDefault();
+    };
+});
+
+function removeInventoryItem(id) {
+    let invItem = document.getElementById(id);
+    inventoryList.removeChild(invItem);
+};
