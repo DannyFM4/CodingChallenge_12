@@ -1,5 +1,7 @@
 // Task 1: Business Dashboard – DOM Element Selection and Creation
 
+
+
 // select the dashboard container
 const dashboard = document.getElementById("dashboard");
 const selectDashboard = document.querySelector("#dashboard");
@@ -66,3 +68,28 @@ function removeInventoryItem(id) {
     let invItem = document.getElementById(id);
     inventoryList.removeChild(invItem);
 };
+
+
+// Task 4: Business Customer Section – Handling Event Bubbling
+
+const customerSectionDiv = document.getElementById("customerSection");
+
+function addCustomerCard(name) {
+    const customerDiv = document.createElement("div");
+
+    customerDiv.textContent = name;
+
+    customerDiv.addEventListener("click", (event) => {
+        console.log("Customer Card Clicked");
+        event.stopPropagation;
+    });
+
+    customerSectionDiv.appendChild(customerDiv);
+};
+
+customerSectionDiv.addEventListener("click", () => {
+    console.log("Customer Section Clicked");
+});
+
+addCustomerCard("First Customer");
+addCustomerCard("Second Customer");

@@ -4,20 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript DOM Manipulation and Event Handling Challenge – Interactive Business Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        .metric-card {
+            padding: 10px;
+            margin: 10px;
+            background-color: aqua;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        .product-item {
+            cursor: pointer;
+            color: crimson;
+        }
+        .customer-card {
+            padding: 10px;
+            margin: 10px;
+            background-color: aquamarine;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        #dashboard, #inventoryList, #customerSection {
+            margin-bottom: 10px;
+        };
+    </style>
+
 </head>
 <body>
     <h1>Interactive Dashboard</h1>
-    <br>
-    <div id="dashboard">
-        <form id="productForm">
-            <input type="text" id="productName" placeholder="Product Name" required>
-            <button type="submit">Add Product</button>
-            <div id="error"></div>
-        </form>
-        <ul id="inventoryList"></ul>
-        <br>
-    </div>
+
+    <h2>Dashboard Metrics</h2>
+    <div id="dashboard"></div>
+
+    <h2>Inventory List</h2>
     <ul id="inventoryList"></ul>
+    <button onclick="addItemToInventory('Laptop')">Add Laptop</button>
+    <button onclick="addItemToInventory('SmartPhone')">Add SmartPhone</button>
+
+    <h2>Customer Section</h2>
+    <div id="customerSection"></div>
+
+
+
     <script src="cc_12.js"></script>
 </body>
 </html>
