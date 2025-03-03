@@ -1,95 +1,100 @@
 // Task 1: Business Dashboard – DOM Element Selection and Creation
 
+document.addEventListener("DOMContentLoaded", function(){
+    
+    // creates the dashboard selector by elements
+    const dashboard = document.getElementById("dashboard");
+    const dashboard2 = document.querySelector("#dashboard");
 
+    // appends the metric card
+    dashboard.appendChild(createMetricCard("revenueCard", "Revenue", 120));
 
-// select the dashboard container
-const dashboard = document.getElementById("dashboard");
-const selectDashboard = document.querySelector("#dashboard");
+    function createMetricCard(id, title, amount) { // creates function
+        const metricDiv = document.createElement("div");
+        
+        // sets the different attributes
+        metricDiv.setAttribute("id", id);
+        metricDiv.setAttribute("class", "metric-card");
 
-// create new div
-const metricCard = document.createElement("div");
+        const heading = document.createElement("h3");
 
-// assigning class and id to different elements
-metricCard.setAttribute("class", "metric-card");
-metricCard.setAttribute("id", "revenueCard");
+        // makes the heading text "title"
+        heading.textContent = title;
 
-// ppulating card with a place holder
-metricCard.textContent = "Revenue: $0";
+        const paragraph = document.createElement("p");
 
-// append metric card
-dashboard.appendChild(metricCard);
+        // makes text the money amount
+        paragraph.textContent = `$${amount}`;
 
+        metricDiv.appendChild(heading);
+        metricDiv.appendChild(paragraph);
 
-// Task 2: Updating Dashboard Metrics – Working with NodeLists and Arrays
+        return metricDiv;
+    };
+    // Task 2
 
-const metricCards = document.querySelectorAll(".metric-card"); // selects all elements with metric-card class
-const metricCardArray = Array.from(metricCards); //converts list into array
+    // creates the metric cards 
+    dashboard2.appendChild(createMetricCard("profitCard", "Profit", 80));
+    dashboard.appendChild(createMetricCard("expensesCard", "Expenses", 50));
 
+    const metricCards = document.querySelectorAll(".metric-card");
+    const metricCardsArray = Array.from(metricCards); // makes metricCards an array
 
-metricCardArray.forEach(card => { // uses forEach method to update the information
-    card.textContent += " - Updated";
+    metricCardsArray.forEach((card) => { // goes through the array for each item
+        const myHeading = card.querySelector("h3");
 
-    card.style.backgroundColor = "#f0f8ff";
+        myHeading.textContent += " - Updated"; // updates the revenue
+
+        card.style.backgroundColor = "blue";
+    });
+
+    // Task 4: Business Customer Section – Handling Event Bubbling
+
+    const customerSectionDiv = document.getElementById("customerSection");
+
+    function addCustomerCard(name) { // creates a function to add a customer card
+        const customerDiv = document.createElement("div");
+
+        customerDiv.setAttribute("class", "customer-card");
+
+        customerDiv.textContent = name;
+
+        customerDiv.addEventListener("click", (event) => { // listens for an event
+            console.log("Customer Card Clicked"); // logs the sentence in the console when event is heard
+            event.stopPropagation;
+        });
+
+        customerSectionDiv.appendChild(customerDiv);
+    };
+
+    customerSectionDiv.addEventListener("click", () => { // listen for an event "click"
+        console.log("Customer Section Clicked"); // when hears event logs message in the console
+    });
+
+    // creates the customer card
+    addCustomerCard("First Customer");
+    addCustomerCard("Second Customer");
+    
 });
 
 
 // Task 3: Dynamic Inventory Management – Adding and Removing Items
 
-const inventoryList = document.getElementById("inventoryList");
+function addItemToInventory(product) { // creates function that will add inventory items
+    const inventoryList = document.getElementById("inventoryList");
+    const newListItem = document.createElement("li");
 
-function addItemToInventory(product) {
-    let newListItem = document.createElement("li");
+    // sets attributes for list items
     newListItem.setAttribute("class", "product-item");
-    newListItem.setAttribute("id", "product");
-    newListItem.setAttribute("onclick", `removeInventoryItem("${product}")`);
+    newListItem.setAttribute("data-product", product);
     newListItem.textContent = product;
-    inventoryList.appendChild(newListItem);
-};
 
-addItemToInventory("Click Me");
-addItemToInventory("Add a product below");
+    newListItem.addEventListener("click", function() { // listens for a click event
+        inventoryList.removeChild(product);
 
-let productForm = document.getElementById('productForm');
-let error = document.getElementById('Error');
-
-productForm.addEventListener('submit', (event1) => {
-    let productName = document.getElementById('productName').ariaValueMax;
-    if(productName === '') {
-        error.textContent = 'Product name is reuired';
-        event1.preventDefault();
-    } else {
-        error.textContent = '';
-        addItemToInventory(productName);
-        event1.preventDefault();
-    };
-});
-
-function removeInventoryItem(id) {
-    let invItem = document.getElementById(id);
-    inventoryList.removeChild(invItem);
-};
-
-
-// Task 4: Business Customer Section – Handling Event Bubbling
-
-const customerSectionDiv = document.getElementById("customerSection");
-
-function addCustomerCard(name) {
-    const customerDiv = document.createElement("div");
-
-    customerDiv.textContent = name;
-
-    customerDiv.addEventListener("click", (event) => {
-        console.log("Customer Card Clicked");
-        event.stopPropagation;
+        console.log(`Removed Item: ${product}`); // logs the removed items in the console
     });
 
-    customerSectionDiv.appendChild(customerDiv);
+    inventoryList.appendChild(product);
 };
 
-customerSectionDiv.addEventListener("click", () => {
-    console.log("Customer Section Clicked");
-});
-
-addCustomerCard("First Customer");
-addCustomerCard("Second Customer");
