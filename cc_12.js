@@ -1,6 +1,6 @@
 // Task 1: Business Dashboard – DOM Element Selection and Creation
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function(){ // encapsulates most of code with an event listener
     
     // creates the dashboard selector by elements
     const dashboard = document.getElementById("dashboard");
@@ -90,11 +90,11 @@ function addItemToInventory(product) { // creates function that will add invento
     newListItem.textContent = product;
 
     newListItem.addEventListener("click", function() { // listens for a click event
-        inventoryList.removeChild(product);
+        inventoryList.removeChild(product); // removes item in inventory list
 
         console.log(`Removed Item: ${product}`); // logs the removed items in the console
     });
 
-    inventoryList.appendChild(product);
+    inventoryList.appendChild(product); // appends the inventory list using the product
 };
 
